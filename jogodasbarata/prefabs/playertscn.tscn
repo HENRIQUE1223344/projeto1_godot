@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3tswbruibu0t"]
+
+[ext_resource type="Script" path="res://prefabs/scripts/playertscn.gd" id="1_v88v4"]
+[ext_resource type="Texture2D" uid="uid://5jjrf5vofhlv" path="res://assets/1.png" id="2_7qeud"]
+[ext_resource type="Texture2D" uid="uid://b5t33wvugks5v" path="res://assets/Design sem nome.png" id="3_dmdyq"]
+[ext_resource type="Texture2D" uid="uid://crn481y0e7w3v" path="res://assets/2.png" id="3_uwtx2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s4f5i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7qeud")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dmdyq")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_uwtx2")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7qeud")
+}],
+"loop": true,
+"name": &"move_up ",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpdxt"]
+size = Vector2(19.801, 19.192)
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_v88v4")
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.49999, 0.500005)
+scale = Vector2(0.141146, 0.130556)
+sprite_frames = SubResource("SpriteFrames_s4f5i")
+animation = &"move"
+autoplay = "idle"
+flip_h = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(2.62613, 2.61096)
+shape = SubResource("RectangleShape2D_fpdxt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
